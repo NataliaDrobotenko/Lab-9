@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <Windows.h>
+using namespace std;
+
+
+size_t find_char(const char* str, char c, size_t pos = 0) {
+    size_t len = strlen(str);
+    for (size_t i = pos; i < len; i++) {
+        if (str[i] == c) {
+            return i+1;
+        }
+    }
+    return len; // возвращает len, если символ не найден
+}
+
+void task1()
+{
+    const int MAX_SIZE = 100;
+    char str[MAX_SIZE];
+    string s;
+
+    cout << "Enter a string: ";
+    cin.getline(str, MAX_SIZE);
+
+    s = str;
+
+    cout << "Using string::find():\n";
+    cout << "The position of 'o' is: " <<  s.find('о')+1 << endl;
+
+    cout << "Using find_char():\n";
+    cout << "The position of 'o' is: " << find_char(str, 'о') << endl;
+}
+
+int countWordsWithA(string sentence) {
+    int count = 0;
+    string word;
+    for (int i = 0; i < sentence.length(); i++) {
+        if (sentence[i] != ' ') {
+            word += sentence[i];
+        }
+        else {
+            if (word.find('А') != string::npos) {
+                count++;
+            }
+            word = "";
+        }
+    }
+    if (word.find('А') != string::npos) {
+        count++;
+    }
+    return count;
+}
+bool data_verification(string sentence)
+{
+    return countWordsWithA(sentence) > 0;
+}
+void task2() {
+    ifstream inputFile("input.txt");
+    ofstream outputFile("output.txt");
+    if (inputFile.is_open() && outputFile.is_open()) {
+        string sentence;
+        getline(inputFile, sentence);
+        if (data_verification(sentence))
+        {
+            int count = countWordsWithA(sentence);
+        outputFile << count << endl;
+        inputFile.close();
+        outputFile.close();
+        }
+        else
+        {
+            cout << "Error" << endl;
+        }
+    }
+    else {
+        cout << "Unable to open input.txt or output.txt file" << endl;
+    }
+}
+
+
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    task1();
+    task2();
+}
