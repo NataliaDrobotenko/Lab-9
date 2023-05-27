@@ -1,0 +1,177 @@
+#include <iostream>
+using namespace std;
+struct TTime {
+	int 
+		hour,
+		min,
+		sec;
+	TTime() {
+		hour = 0;
+		min = 0;
+		sec = 0;
+	}
+
+	TTime(int Hour, int Min, int Sec) {
+		hour = Hour;
+		min = Min;
+		sec = Sec;
+	}
+};
+
+string CheckTime(TTime t) {
+		string right;
+		if (t.hour>23 || t.hour<0)
+		{
+			right += '1';
+		}
+		else
+		{
+			right += '0';
+		}
+		if (t.min > 69 || t.min < 0)
+		{
+			right += '1';
+
+		}
+		else
+		{
+			right += '0';
+		}
+		if (t.sec > 69 || t.sec < 0)
+		{
+			right += '1';
+		}
+		else
+		{
+			right += '0';
+		}
+		return right;
+	}
+
+void NextSec(TTime t) {
+
+	if (CheckTime(t)=="000")
+	{
+		if (t.sec != 59) {
+			t.sec += 1;
+		}
+		else 
+		{
+			t.sec = 00;
+			if (t.min!=59)
+			{
+				t.min += 1;
+			}
+			else
+			{
+				t.min = 00;
+				if (t.hour!=23)
+				{
+					t.hour += 1;
+				}
+				else
+				{
+					t.hour = 00;
+				}
+			}
+
+		}
+	}
+	cout << t.hour << ':' << t.min << ':' << t.sec << endl;
+
+}
+
+
+void task1() {
+	TTime t1(05, 47, 8); 
+	TTime t2(23, 59, 59); 
+	TTime t3(21, 59, 59); 
+	TTime t4(04,7, 59);
+	TTime t5(25, 78, 100);
+	NextSec(t1);
+	NextSec(t2);
+	NextSec(t3);
+	NextSec(t4);
+	NextSec(t5);
+
+
+
+
+}
+
+struct begin25 {
+	int x;
+	bool bool25() {
+		return x != 0;
+}
+double example() {
+	return 3*pow(x,6)-6*(x*x)-7	;
+}
+
+};
+
+void task2() {
+	begin25 task{};
+	cout << "Enter x:";
+	cin >> task.x;
+	if (task.bool25())
+	{
+		cout << "Y=" << task.example() << endl;
+	}
+}
+struct boolean38
+{
+	int
+		x1,
+		y1,
+		x2,
+		y2;
+
+	bool bool38() {
+		if (x1 < 1 || x1 > 8 || y1 < 1 || y1 > 8 || x2 < 1 || x2 > 8 || y2 < 1 || y2 > 8)
+		{		return false;
+
+		}
+	return true;
+	}		
+
+bool elephant()
+{
+	return (abs(x1 - x2) == abs(y1 - y2));
+}
+};
+
+void task3() {
+	boolean38 obj{};
+	cout << "Enter x1:";
+	cin >> obj.x1;
+	cout << "Enter y1:";
+	cin >> obj.y1;
+	cout << "Enter x2:";
+	cin >> obj.x2;
+	cout << "Enter y2:";
+	cin >> obj.y2;
+	if (obj.bool38())
+	{
+		if (obj.elephant())
+		{
+			cout << "Yes, an elephant can walk like that" << endl;
+		}
+		else
+		{
+			cout << "No, an elephant can't walk like that." << endl;
+
+		}
+	}
+	else
+	{
+		cerr << "Error" << endl;
+	}
+}
+int main() {
+	task1();
+	task2();
+	task3();
+	return 0;
+}
+
